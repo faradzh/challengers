@@ -25,7 +25,7 @@ SECRET_KEY = 'r-h2=ebng7p07pa@05ni3mb695dff$6(g=ofnm(izndd9xr6v@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,8 +40,22 @@ INSTALLED_APPS = [
     'places',
     'maps',
     'profiles',
+    'social.apps.django_app.default',
     'django_google_maps'
 ]
+
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.open_id.OpenIdAuth',
+    'social.backends.google.GoogleOpenId',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.google.GoogleOAuth',
+    'social.backends.twitter.TwitterOAuth',
+    'social.backends.twitter.TwitterOAuth',
+    'social.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,6 +80,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -123,3 +139,8 @@ GOOGLE_MAPS_API_KEY = 'AIzaSyBSVJHRPsTT91tsgmna4JhHs094tdUKR1I'
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# SOCIAL AUTH
+SOCIAL_AUTH_FACEBOOK_KEY = '924796257622157'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'd82ea5eff1828247582451763b3aad63'
