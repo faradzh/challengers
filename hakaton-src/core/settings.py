@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'places',
     'maps',
     'profiles',
+    'django_google_maps'
 ]
 
 MIDDLEWARE = [
@@ -116,6 +117,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+GOOGLE_MAPS_API_KEY = 'AIzaSyBSVJHRPsTT91tsgmna4JhHs094tdUKR1I'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
