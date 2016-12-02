@@ -1,6 +1,8 @@
 from __future__ import unicode_literals
+from django.utils import timezone
 from django_google_maps import fields as map_fields
 from django.db import models
+from profiles.models import Profile
 
 
 class Challenge(models.Model):
@@ -17,8 +19,8 @@ class Challenge(models.Model):
 
 class Comment(models.Model):
     content = models.TextField(max_length=255, verbose_name=u'Content')
-    date_created = models.DateField(verbose_name=u'Date created')
-    challenge = models.ForeignKey(Challenge)
+    date_created = models.DateField(default=timezone.now, verbose_name=u'Date created')
+    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.id
