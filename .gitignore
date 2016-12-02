@@ -1,0 +1,27 @@
+*.pyc
+*.sqlite3
+
+.idea
+hakaton-src/media/
+hakaton-src/static/*
+hakaton-src/reports/
+hakaton-src/logs-log.txt*
+
+
+# VIRTUALENV
+venv*/
+
+
+# NPM
+node_modules/
+
+# OS generated files #
+######################
+*.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+ngrok
