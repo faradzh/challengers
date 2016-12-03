@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'maps',
     'profiles',
     'social.apps.django_app.default',
-    'django_google_maps'
+    'django_google_maps',
     'django_social_share',
 ]
 

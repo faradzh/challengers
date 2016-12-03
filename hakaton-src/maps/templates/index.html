@@ -14,16 +14,20 @@
     <a class="weather" href="#"> <img width="35" height="35" src="/static/img/rain-xxl.png" alt="Weather"> <span>+ 24° C</span> </a>
     <div class="b-header__ctrl">
     <div class="b-header__ctrl__item"> <a href="Add-Place.html" class="btn btn--black"><i class="fa fa-plus-square" aria-hidden="true"></i><span>Discover the world</span></a> </div>
-    <div class="b-header__ctrl__item">
-    <a href="#" class="ab-item login jquery_popup"> <i class="fa fa-unlock-alt" aria-hidden="true"></i><span>My Account</span>
-    </a>
-    </div>
+        {% if user and not user.is_anonymous %}
+        <div class="b-header__ctrl__item">
+            <a href="{% url 'auth:logout' %}?next={{ request.path }}" class="ab-item login">Logout</a>
+            {% else %}
+            <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="ab-item login"> <i class="fa fa-unlock-alt" aria-hidden="true"></i><span>Login FB</span>
+            </a>
+        </div>
+        {% endif %}
     <div class="b-header__ctrl__item">
 
-    <form class="searchbox">
-    <input type="search" placeholder="Search......" name="search" class="searchbox-input" onkeyup="buttonUp();">
-    <button type="submit" class="searchbox-submit"><i class="fa fa-search" aria-hidden="true"></i>
-    </button> <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true"></i></span> </form>
+    <!--<form class="searchbox">-->
+    <!--<input type="search" placeholder="Search......" name="search" class="searchbox-input" onkeyup="buttonUp();">-->
+    <!--<button type="submit" class="searchbox-submit"><i class="fa fa-search" aria-hidden="true"></i>-->
+    <!--</button> <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true"></i></span> </form>-->
     </div>
     </div>
 
@@ -50,57 +54,54 @@
     <div id="hellopreloader">
     <div id="hellopreloader_preload"></div>
     </div>
-    <div class="hidden b-jquery-popup">
-    <div class="b-form-reg-popup">
-    <h2 class="b-form-reg-popup__title m--centered">Register Now</h2>
-    <div class="b-form__row clearfix">
-    <a href="#" class="b-form-reg-popup__facebook press--left"><img src="/static/img/facebook-link.jpg" alt="facebook">
-    </a>
-    <a href="#" class="b-form-reg-popup__google press--right"><img src="/static/img/google-link.jpg" alt="google">
-    </a>
-    </div>
-    <div class="b-form__row">
-    <input type="text" placeholder="Your Name">
-    </div>
-    <div class="b-form__row">
-    <input type="text" placeholder="Email Address">
-    </div>
-    <div class="b-form__row">
-    <input type="text" placeholder="Phone Number">
-    </div>
-    <div class="b-form__row">
-    <select data-placeholder="Choose a Country..." class="chosen-select-2" tabindex="2">
-    <option value=""></option>
-    <option value="United States">United States</option>
-    <option value="United Kingdom">United Kingdom</option>
-    <option value="Afghanistan">Afghanistan</option>
-    <option value="Aland Islands">Aland Islands</option>
-    <option value="Albania">Albania</option>
-    <option value="Algeria">Algeria</option>
-    <option value="American Samoa">American Samoa</option>
-    <option value="Andorra">Andorra</option>
-    <option value="Angola">Angola</option>
-    <option value="Anguilla">Anguilla</option>
-    <option value="Antarctica">Antarctica</option>
-    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-    <option value="Argentina">Argentina</option>
-    <option value="Armenia">Armenia</option>
-    <option value="Aruba">Aruba</option>
-    <option value="Australia">Australia</option>
-    <option value="Austria">Austria</option>
-    <option value="Azerbaijan">Azerbaijan</option>
-    <option value="Bahamas">Bahamas</option>
-    <option value="Bahrain">Bahrain</option>
-    </select>
-    </div>
-    <div class="b-form__row m--centered">
-    <a href="#" class="btn">Register now</a>
-    </div>
-    </div>
-    </div>
-    <div class="b-map-menu">
-
-    </div>
+    <!--<div class="hidden b-jquery-popup">-->
+    <!--<div class="b-form-reg-popup">-->
+    <!--<h2 class="b-form-reg-popup__title m&#45;&#45;centered">Register Now</h2>-->
+    <!--<div class="b-form__row clearfix">-->
+    <!--<a href="#" class="b-form-reg-popup__facebook press&#45;&#45;left"><img src="/static/img/facebook-link.jpg" alt="facebook">-->
+    <!--</a>-->
+    <!--<a href="#" class="b-form-reg-popup__google press&#45;&#45;right"><img src="/static/img/google-link.jpg" alt="google">-->
+    <!--</a>-->
+    <!--</div>-->
+    <!--<div class="b-form__row">-->
+    <!--<input type="text" placeholder="Your Name">-->
+    <!--</div>-->
+    <!--<div class="b-form__row">-->
+    <!--<input type="text" placeholder="Email Address">-->
+    <!--</div>-->
+    <!--<div class="b-form__row">-->
+    <!--<input type="text" placeholder="Phone Number">-->
+    <!--</div>-->
+    <!--<div class="b-form__row">-->
+    <!--<select data-placeholder="Choose a Country..." class="chosen-select-2" tabindex="2">-->
+    <!--<option value=""></option>-->
+    <!--<option value="United States">United States</option>-->
+    <!--<option value="United Kingdom">United Kingdom</option>-->
+    <!--<option value="Afghanistan">Afghanistan</option>-->
+    <!--<option value="Aland Islands">Aland Islands</option>-->
+    <!--<option value="Albania">Albania</option>-->
+    <!--<option value="Algeria">Algeria</option>-->
+    <!--<option value="American Samoa">American Samoa</option>-->
+    <!--<option value="Andorra">Andorra</option>-->
+    <!--<option value="Angola">Angola</option>-->
+    <!--<option value="Anguilla">Anguilla</option>-->
+    <!--<option value="Antarctica">Antarctica</option>-->
+    <!--<option value="Antigua and Barbuda">Antigua and Barbuda</option>-->
+    <!--<option value="Argentina">Argentina</option>-->
+    <!--<option value="Armenia">Armenia</option>-->
+    <!--<option value="Aruba">Aruba</option>-->
+    <!--<option value="Australia">Australia</option>-->
+    <!--<option value="Austria">Austria</option>-->
+    <!--<option value="Azerbaijan">Azerbaijan</option>-->
+    <!--<option value="Bahamas">Bahamas</option>-->
+    <!--<option value="Bahrain">Bahrain</option>-->
+    <!--</select>-->
+    <!--</div>-->
+    <!--<div class="b-form__row m&#45;&#45;centered">-->
+    <!--<a href="#" class="btn">Register now</a>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
 
     <div class="b-slide-menu opened">
     <div class="b-slide-menu__toggle"><i class="fa fa-caret-left" aria-hidden="true"></i><i class="fa fa-caret-right hidden" aria-hidden="true"></i>
