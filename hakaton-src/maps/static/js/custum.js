@@ -418,6 +418,17 @@ var MyCity_map_init_obj = {
     "geolocation": "",
     "weather": "s2"
 };
+
+var allChallengesData = [];
+function fetchAllChallenges() {
+    $.get( "/challenges-json").done(function(data) {
+        allChallengesData = data;
+        console.log("All challenges", allChallengesData);
+      });
+}
+fetchAllChallenges();
+
+
 var mapObject, markers = [], markersData = {
     'kymyz': [{
         name: 'Get engaged in making kymyz',
