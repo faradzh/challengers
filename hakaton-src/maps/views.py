@@ -37,3 +37,16 @@ class AddChallenge(View):
         marker_id = request.POST.get("markerId")
         AcceptedChallenge.objects.create(challenge=marker_id, user_id=user_id)
         return HttpResponse(status=201)
+
+
+class ChallengeView(TemplateView):
+    template_name = "challenge_view.html"
+    def get_context_data(self, **kwargs):
+        try:
+            challenges = Challenge.objects.all()
+            context = super(ChallengeView, self).get_context_data()
+            context['challenges'] = challenges
+        except:
+            pass
+
+        return context
