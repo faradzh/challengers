@@ -404,9 +404,9 @@ var MyCity_map_init_obj = {
     "delete": "http:\/\/city2.wpmix.net\/wp-admin\/admin-post.php?action=nightcity_handle_delete_media",
     "theme_url": "http:\/\/city2.wpmix.net\/wp-content\/themes\/nightcity",
     "global_map_styles": "[]",
-    "lat": "42.73333299999999",
-    "longu": "75.33333300000004",
-    "zum": "13",
+    "lat": "41.20438",
+    "longu": "74.76609800000006",
+    "zum": "7",
     "ajaxurl": "http:\/\/city2.wpmix.net\/wp-admin\/admin-ajax.php",
     "direct": "http:\/\/city2.wpmix.net\/wp-content\/themes\/nightcity",
     "weather_latitude": "0",
@@ -423,6 +423,7 @@ var allChallengesData = [];
 function fetchAllChallenges() {
     $.get( "/challenges-json").done(function(data) {
         transformData(data);
+        initialize_new();
     });
 }
 fetchAllChallenges();
@@ -434,54 +435,37 @@ function getLatitude(geolocation) {
 function getLongitude(geolocation) {
     return geolocation.split(',')[1];
 }
-
+var mapObject, markers = [];
 var markersData = {};
 function transformData(allChallengesData) {
-        for (var i=0; i<=allChallengesData.length; i++){
-            if (typeof allChallengesData[i] !== 'undefined' && allChallengesData[i] !== null) {
-                var challengeTitle = allChallengesData[i].title;
-                var challenge = allChallengesData[i];
-                var finalMarkersData = {};
-                finalMarkersData = {
-                    name: challenge.title,
-                    location_latitude: getLatitude(challenge.geolocation),
-                    location_longitude: getLongitude(challenge.geolocation),
-                    map_image_url: "/static/img/map/m-195.png",
-                    name_point: challenge.title,
-                    fa_icon: "/static/img/map/m-195.png",
-                    km: "",
-                    time: "",
-                    featuresicon: "",
-                    description_point: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto atque corporis fuga id incidunt. Dicta hic officiis",
-                    url_point: "",
-                    moreinfo: "Accept"
-                };
-                var arr = [];
-                arr.push(finalMarkersData);
-                markersData[challengeTitle] = arr;
-            }
+    for (var i in allChallengesData){
+        if(!allChallengesData.hasOwnProperty(i)){continue;}
+        if (typeof allChallengesData[i] !== 'undefined' && allChallengesData[i] !== null) {
+            var challengeTitle = allChallengesData[i].title;
+            var challenge = allChallengesData[i];
+            var finalMarkersData = {};
+            finalMarkersData = {
+                id: challenge.id,
+                name: challenge.title,
+                location_latitude: getLatitude(challenge.geolocation),
+                location_longitude: getLongitude(challenge.geolocation),
+                map_image_url: challenge.photo,
+                name_point: challenge.title,
+                fa_icon: "/static/img/map/m-195.png",
+                km: "",
+                time: "",
+                fetaturesicon: "",
+                description_point: challenge.description,
+                url_point: 'http://city2.wpmix.net/htmlgit/cityevents_ajaxed/Single-Place.html',
+                moreinfo: "Accept"
+            };
+            var arr = [];
+            arr.push(finalMarkersData);
+            markersData[challengeTitle] = arr;
         }
-    console.log("Super market", markersData);
+    }
 }
 
-var mapObject, markers = [];
-// markersData = {
-//     'Burana': [{
-//         name: 'Burana',
-//         location_latitude: '42.73333299999999',
-//         location_longitude: '75.33333300000004',
-//         map_image_url: '/static/img/src/cinema.jpg',
-//         name_point: 'Burana',
-//         fa_icon: '/static/img/map/m-195.png',
-//         km: '',
-//         time: '',
-//         featuresicon: '',
-//         description_point: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto atque corporis fuga id incidunt. Dicta hic officiis',
-//         url_point: 'http://city2.wpmix.net/htmlgit/cityevents_ajaxed/Single-Place.html',
-//         moreinfo: 'More info'
-//     }]
-// };
-console.log("Works the shit", markersData);
 function getCurrentLocation(callback) {
     if (!MyCity_map_init_obj.geolocation == false) {
         if (!navigator.geolocation)
@@ -495,6 +479,25 @@ function getCurrentLocation(callback) {
 var lot = getCurrentLocation(function(currLocMap) {
     return currLocMap;
 });
+
+function acceptChallenge(userId, markerId){
+    var url = "/add-challenge";
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {
+          userId: userId,
+          markerId: markerId,
+          'csrfmiddlewaretoken': csrf_token
+      },
+      success: function () {
+          console.log("success");
+      },
+      dataType: "application/json"
+    });
+    console.log("In accepting challenges!")
+}
+var markerId;
 function initialize_new() {
     var bounds = new google.maps.LatLngBounds();
     var mapOptions2 = {
@@ -537,6 +540,7 @@ function initialize_new() {
         markers[key] = [];
         markersData[key].forEach(function(item) {
             marker = new google.maps.Marker({
+                id: item.id,
                 position: new google.maps.LatLng(item.location_latitude,item.location_longitude),
                 map: mapObject,
                 icon: item.fa_icon,
@@ -547,6 +551,9 @@ function initialize_new() {
                 markers[key] = [];
             markers[key].push(marker);
             google.maps.event.addListener(marker, 'click', (function() {
+                markerId = marker.id;
+                console.log("Marker", markerId);
+                acceptChallenge(user_id, markerId);
                 closeInfoBox();
                 getInfoBoxBigImage(item).open(mapObject, this);
                 var lng1 = new google.maps.LatLng(item.location_latitude,item.location_longitude);
@@ -598,8 +605,9 @@ function initialize_new() {
             mapObject.setZoom(parseInt(MyCity_map_init_obj.zum));
         }, 1000);
     }
-}
-;function hideAllMarkers() {
+};
+
+function hideAllMarkers() {
     for (var key in markers)
         markers[key].forEach(function(marker) {
             marker.setMap(null );

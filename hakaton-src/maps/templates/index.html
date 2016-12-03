@@ -23,7 +23,6 @@
         </div>
         {% endif %}
     <div class="b-header__ctrl__item">
-
     <!--<form class="searchbox">-->
     <!--<input type="search" placeholder="Search......" name="search" class="searchbox-input" onkeyup="buttonUp();">-->
     <!--<button type="submit" class="searchbox-submit"><i class="fa fa-search" aria-hidden="true"></i>-->
@@ -454,9 +453,11 @@
     </div>
 
     </div>
-
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI_iMtLfLxggW38M7mrcv2-Fq2NKf8ab4"></script>
-
+      <script type="text/javascript">
+        var user_id = "{{ user.id }}";
+        var csrf_token = "{{ csrf_token }}"
+    </script>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/dropzone.js' %}"></script>
     <script src="{% static 'js/chosen.jquery.min.js' %}"></script>

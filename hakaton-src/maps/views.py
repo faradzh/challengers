@@ -1,10 +1,7 @@
-from django.http import JsonResponse
-
-# Create your views here.
+from django.http import JsonResponse, HttpResponse
 from django.views import View
 from django.views.generic import TemplateView
-
-from maps.models import Challenge
+from maps.models import Challenge, AcceptedChallenge
 
 
 class Index(TemplateView):
@@ -31,3 +28,12 @@ class AllChallengesData(View):
             })
 
         return JsonResponse(challenges_json, safe=False)
+
+
+class AddChallenge(View):
+
+    def post(self, request):
+        user_id = request.POST.get("userId")
+        marker_id = request.POST.get("markerId")
+        AcceptedChallenge.objects.create(challenge=marker_id, user_id=user_id)
+        return HttpResponse(status=201)
