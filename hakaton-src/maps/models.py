@@ -12,7 +12,7 @@ class Challenge(models.Model):
     description = models.TextField(max_length=255, verbose_name=u'Description', null=True)
     reward_point = models.IntegerField(max_length=255, verbose_name=u'Reward Point', null=True)
     difficulty = models.IntegerField(max_length=200, verbose_name=u'Difficulty', default=1)
-    photo = models.ImageField(verbose_name=u'Photo', null=True)
+    photo = models.ImageField(upload_to="images/challenge", verbose_name=u'Photo', null=True )
 
     @property
     def photo_url(self):
@@ -40,4 +40,3 @@ class CompletedChallenge(models.Model):
 class AcceptedChallenge(models.Model):
     challenge = models.ForeignKey(Challenge)
     user = models.ForeignKey(Profile)
-
