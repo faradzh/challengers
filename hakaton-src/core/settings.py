@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'profiles',
     'social.apps.django_app.default',
     'django_google_maps'
+    'django_social_share',
 ]
 
 
@@ -100,6 +101,11 @@ DATABASES = {
     }
 }
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # 'compressor.finders.CompressorFinder',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -140,6 +146,7 @@ GOOGLE_MAPS_API_KEY = 'AIzaSyBSVJHRPsTT91tsgmna4JhHs094tdUKR1I'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # SOCIAL AUTH
 SOCIAL_AUTH_FACEBOOK_KEY = '924796257622157'

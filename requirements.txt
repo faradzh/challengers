@@ -2,6 +2,7 @@ codegen==1.0
 defusedxml==0.4.1
 Django==1.10.4
 django-google-maps==0.6.0
+django-social-share==1.0.0
 oauthlib==2.0.1
 Pillow==3.4.2
 PyJWT==1.4.2
