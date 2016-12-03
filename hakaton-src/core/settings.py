@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'maps',
     'profiles',
     'social.apps.django_app.default',
+    'django_social_share',
 ]
 
 
@@ -99,6 +100,11 @@ DATABASES = {
     }
 }
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -137,7 +143,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # SOCIAL AUTH
 SOCIAL_AUTH_FACEBOOK_KEY = '924796257622157'

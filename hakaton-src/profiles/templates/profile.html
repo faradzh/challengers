@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load social_share %}
+{% block main %}
+
+<h2>{{ user.get_full_name }}</h2>
+<ul>
+  {% post_to_facebook object_or_url "Post to Facebook!" %}
+
+  <li>Username: {{ user.username }}</li>
+  <li>Location: {{ user.profile.first_name }}</li>
+  <li>Birth Date: {{ user.profile.birth_date }}</li>
+</ul>
+
+{% endblock %}
