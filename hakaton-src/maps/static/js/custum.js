@@ -422,43 +422,66 @@ var MyCity_map_init_obj = {
 var allChallengesData = [];
 function fetchAllChallenges() {
     $.get( "/challenges-json").done(function(data) {
-        allChallengesData = data;
-        console.log("All challenges", allChallengesData);
-      });
+        transformData(data);
+    });
 }
 fetchAllChallenges();
 
+function getLatitude(geolocation) {
+    return geolocation.split(',')[0];
+}
 
-var mapObject, markers = [], markersData = {
-    'kymyz': [{
-        name: 'Get engaged in making kymyz',
-        location_latitude: '42.73333299999999',
-        location_longitude: '75.33333300000004',
-        map_image_url: '/static/img/src/kymyz.jpg',
-        name_point: 'Get engaged in making kymyz',
-        fa_icon: '/static/img/map/m-195.png',
-        km: '',
-        time: '',
-        fetaturesicon: '',
-        description_point: 'The best kymyz is made in Naryn, At-Bashi, so yoou can go there and particiate in  making this drink.',
-        url_point: '',
-        moreinfo: 'Accept'
-    }],
-    'selfie': [{
-        name: 'Get engaged in making kymyz',
-        location_latitude: '40.9331541',
-        location_longitude: '72.9814877',
-        map_image_url: '/static/img/src/kymyz.jpg',
-        name_point: 'Get engaged in making kymyz',
-        fa_icon: '/static/img/map/m-195.png',
-        km: '',
-        time: '',
-        fetaturesicon: '',
-        description_point: 'The best kymyz is made in Naryn, At-Bashi, so yoou can go there and particiate in  making this drink.',
-        url_point: '',
-        moreinfo: 'Accept'
-    }]
-};
+function getLongitude(geolocation) {
+    return geolocation.split(',')[1];
+}
+
+var markersData = {};
+function transformData(allChallengesData) {
+        for (var i=0; i<=allChallengesData.length; i++){
+            if (typeof allChallengesData[i] !== 'undefined' && allChallengesData[i] !== null) {
+                var challengeTitle = allChallengesData[i].title;
+                var challenge = allChallengesData[i];
+                var finalMarkersData = {};
+                finalMarkersData = {
+                    name: challenge.title,
+                    location_latitude: getLatitude(challenge.geolocation),
+                    location_longitude: getLongitude(challenge.geolocation),
+                    map_image_url: "/static/img/map/m-195.png",
+                    name_point: challenge.title,
+                    fa_icon: "/static/img/map/m-195.png",
+                    km: "",
+                    time: "",
+                    featuresicon: "",
+                    description_point: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto atque corporis fuga id incidunt. Dicta hic officiis",
+                    url_point: "",
+                    moreinfo: "Accept"
+                };
+                var arr = [];
+                arr.push(finalMarkersData);
+                markersData[challengeTitle] = arr;
+            }
+        }
+    console.log("Super market", markersData);
+}
+
+var mapObject, markers = [];
+// markersData = {
+//     'Burana': [{
+//         name: 'Burana',
+//         location_latitude: '42.73333299999999',
+//         location_longitude: '75.33333300000004',
+//         map_image_url: '/static/img/src/cinema.jpg',
+//         name_point: 'Burana',
+//         fa_icon: '/static/img/map/m-195.png',
+//         km: '',
+//         time: '',
+//         featuresicon: '',
+//         description_point: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto atque corporis fuga id incidunt. Dicta hic officiis',
+//         url_point: 'http://city2.wpmix.net/htmlgit/cityevents_ajaxed/Single-Place.html',
+//         moreinfo: 'More info'
+//     }]
+// };
+console.log("Works the shit", markersData);
 function getCurrentLocation(callback) {
     if (!MyCity_map_init_obj.geolocation == false) {
         if (!navigator.geolocation)
