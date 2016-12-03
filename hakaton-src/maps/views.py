@@ -1,7 +1,8 @@
 from django.http import JsonResponse, HttpResponse
 from django.views import View
 from django.views.generic import TemplateView
-from maps.models import CompletedChallenge, AcceptedChallenge, Challenge
+from maps.models import Challenge, AcceptedChallenge, CompletedChallenge
+from profiles.models import Profile
 
 
 class Index(TemplateView):
@@ -35,7 +36,12 @@ class AddChallenge(View):
     def post(self, request):
         user_id = request.POST.get("userId")
         marker_id = request.POST.get("markerId")
-        AcceptedChallenge.objects.create(challenge=marker_id, user_id=user_id)
+        try:
+            profile = Profile.objects.get(user=user_id)
+            challenge = Challenge.objects.get(pk=marker_id)
+            AcceptedChallenge.objects.create(challenge=challenge, user=profile)
+        except (User.DoesNotExist, Challenge.DoesNotExist):
+            pass
         return HttpResponse(status=201)
 
 
