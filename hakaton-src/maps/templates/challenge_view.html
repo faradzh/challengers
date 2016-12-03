@@ -1,28 +1,7 @@
-<!doctype html>
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en">
-<!--<![endif]-->
 
-<!-- Mirrored from city2.wpmix.net/htmlgit/cityevents_ajaxed/Single-Place.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Nov 2016 08:02:19 GMT -->
-<head>
-<meta charset="utf-8">
-<title>Welcome to Night City</title>
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="css/main.css">
-<!--[if lt IE 9]>
-            <script src="js/vendor/html5-3.6-respond-1.4.2.min.js"></script>
-        <![endif]-->
-</head>
-<body>
-<!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-<div class="b-preloader animated yt-loader">
-<div class="b-preloader__decor"></div>
-</div>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
 <header class="b-header clearfix">
     <a href="index-2.html" class="logo">
         <!--<img src="img/logo_small.png" alt="Night City" title="Night City"> -->
@@ -30,7 +9,8 @@
     <a class="weather" href="#"> <img width="35" height="35" src="/static/img/rain-xxl.png" alt="Weather"> <span>+ 24° C</span> </a>
     <div class="b-header__ctrl">
     <div class="b-header__ctrl__item"> <a href="Add-Place.html" class="btn btn--black"><i class="fa fa-plus-square" aria-hidden="true"></i><span>Discover the world</span></a> </div>
-    <div class="b-header__ctrl__item"> <a href="Add-Place.html" class="btn btn--black"><i class="fa fa-plus-square" aria-hidden="true"></i><span>My Challenges</span></a> </div>
+
+    <div class="b-header__ctrl__item"> <a href="#" class="btn btn--black"><i class="fa fa-plus-square" aria-hidden="true"></i><span>My Challenges</span></a> </div>
         {% if user and not user.is_anonymous %}
         <div class="b-header__ctrl__item">
             <a href="{% url 'auth:logout' %}?next={{ request.path }}" class="ab-item login">Logout</a>
@@ -65,32 +45,35 @@
     </nav>
 
     </header>
-
+<div class="b-preloader animated yt-loader">
+    <div class="b-preloader__decor"></div>
+</div>
 <div class="b-menu">
-<div class="container">
-<h2 class="b-cont-title">My Challenges</h2>
-<div class="b-slider owl-carousel-1">
-<div class="b-menu__set">
-<div class="b-menu__set__item clearfix">
-<div class="b-menu__set__item__img"> <img src="img/src/menu-1.jpg" alt="menu1"> </div>
-<div class="b-menu__set__item__title"> <a class="b-menu__set__item__name" href="#">Veal parmesan</a> <span class="press--right b-menu__set__item__price">$22</span> </div>
-<p class="b-menu__set__item__desc"> Provolone & Marinara Sauce with Spaghetti Marinara </p>
-</div>
-<div class="b-menu__set__item clearfix">
-<div class="b-menu__set__item__img"> <img class="b-menu__set__item__img" src="img/src/menu-2.jpg" alt="menu2"> </div>
-<div class="b-menu__set__item__title"> <a class="b-menu__set__item__name" href="#">Green goddess salad</a> <span class="press--right b-menu__set__item__price">$25</span> </div>
-<p class="b-menu__set__item__desc"> Provolone & Pomodoro with Hand-Cut Fettuccine </p>
-</div>
-</div>
+    <div class="container">
+        <h2 class="b-cont-title">My Challenges</h2>
+
+        <div class="b-slider owl-carousel-1">
+            {% for challenge in challenges %}
+                <div class="b-menu__set">
+                    <div class="b-menu__set__item clearfix">
+                        <div class="b-menu__set__item__img"><img class="b-menu__set__item__img"
+                                                                 src={{ challenge.photo.url }} alt="menu2"></div>
+                        <div class="b-menu__set__item__title"><a class="b-menu__set__item__name"
+                                                                 href="#">{{ challenge.address }}</a> <span
+                                class="press--right b-menu__set__item__price">Accepted</span></div>
+                        <p class="b-menu__set__item__desc"> {{ challenge.description }} </p>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
 
 </div>
 
-</div>
 
 </div>
-
-
-
 
 <script>
             main_js = function () {
@@ -263,113 +246,51 @@
                     });
                 },1000);
             }
-        </script>
-</div>
-
-<div class="b-footer">
-<div class="b-footer__info">
-<div class="container clearfix">
-<div class="row">
-<div class="b-footer__text col-md-3 col-sm-12"> <a href="index-2.html" class="b-footer__logo">Night City</a>
-<p>Cras sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-<div class="b-footer__copyright">© 2017 All Rights Reserved</div>
-</div>
-<div class="b-footer__nav__col col-md-2 col-md-offset-1 col-sm-3 col-xs-4">
-<div class="b-footer__nav__col__title">About us</div>
-<ul>
-<li><a href="Single-Post_Standart.html">Our history</a>
-</li>
-<li><a href="Single-Post_Standart.html">Contact us</a>
-</li>
-<li><a href="Single-Post_Standart.html">Privacy Policy</a>
-</li>
-<li><a href="Single-Post_Standart.html">Terms of Use</a>
-</li>
-</ul>
-</div>
-<div class="b-footer__nav__col col-md-3 col-sm-5 col-xs-8">
-<div class="b-footer__nav__col__title">Categories</div>
-<ul>
-<li><a href="blog.html">Bars</a>
-</li>
-<li><a href="blog.html">Food</a>
-</li>
-<li><a href="blog.html">Restaurants</a>
-</li>
-<li><a href="blog.html">Night life</a>
-</li>
-</ul>
-<ul>
-<li><a href="blog.html">Activities</a>
-</li>
-<li><a href="blog.html">Cinema</a>
-</li>
-<li><a href="blog.html">Hotels</a>
-</li>
-<li><a href="blog.html">Shopping</a>
-</li>
-</ul>
-</div>
-<div class="b-footer__nav__col col-md-2 col-sm-4 col-xs-12">
-<div class="b-footer__nav__col__title">menu</div>
-<ul>
-<li><a href="index-2.html">Home</a>
-</li>
-<li><a href="Places.html">Places</a>
-</li>
-<li><a href="Events.html">Events</a>
-</li>
-<li><a href="Gallery.html">Gallery</a>
-</li>
-</ul>
-<ul>
-<li><a href="blog.html">Blog</a>
-</li>
-<li><a href="Single-Post_Standart.html">Help</a>
-</li>
-<li><a href="Single-Post_Standart.html">Account</a>
-</li>
-</ul>
-</div>
-</div>
-
-</div>
-
-<div class="shared">
-<div class="container clearfix">
-<div class="b-soc"> <a href="#" class="soc-item"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="#" class="soc-item"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="#" class="soc-item"><i class="fa fa-google-plus" aria-hidden="true"></i></a> <a href="#" class="soc-item"><i class="fa fa-dribbble" aria-hidden="true"></i></a> <a href="#" class="soc-item"><i class="fa fa-linkedin" aria-hidden="true"></i></a> </div>
-
-<div class="stores">
-<a href="#" class="stores-black-gp"><img src="img/icon-googleplay.png" alt="">
-</a>
-<a href="#" class="stores-black-apps"><img src="img/apple-ic.png" alt="">
-</a>
-</div>
-</div>
-</div>
-
-</div>
-
-</div>
-
+</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI_iMtLfLxggW38M7mrcv2-Fq2NKf8ab4"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/dropzone.js"></script>
-<script src="js/chosen.jquery.min.js"></script>
-<script src="js/ion.rangeSlider.min.js"></script>
-<script src="js/jquery.popup.min.js"></script>
-<script src="js/jssor.slider.mini.js"></script>
-<script src="js/lightcase.js"></script>
-<script src="js/imagesloaded.pkgd.min.js"></script>
-<script src="js/masonry.pkgd.min.js"></script>
-<script src="js/owl.carousel.js"></script>
-<script src="js/tabs.js"></script>
-<script src="js/tooltip.js"></script>
-<script src="js/compiled_lib.js"></script>
-<script src="js/custum.js"></script>
-<script src="js/jquery.custom-scrollbar.js"></script>
-<script src="js/main.js"></script>
-<script type="text/javascript">/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */</script></body>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/dropzone.js' %}"></script>
+<script src="{% static 'js/chosen.jquery.min.js' %}"></script>
+<script src="{% static 'js/ion.rangeSlider.min.js' %}"></script>
+<script src="{% static 'js/jquery.popup.min.js' %}"></script>
+<script src="{% static 'js/jssor.slider.mini.js' %}"></script>
+<script src="{% static 'js/lightcase.js' %}"></script>
+<script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+<script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.js' %}"></script>
+<script src="{% static 'js/tabs.js' %}"></script>
+<script src="{% static 'js/tooltip.js' %}"></script>
+<script src="{% static 'js/compiled_lib.js' %}"></script>
+<script src="{% static 'js/custum.js' %}"></script>
+<script src="{% static 'js/jquery.custom-scrollbar.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script type="text/javascript">/* <![CDATA[ */
+(function (d, s, a, i, j, r, l, m, t) {
+    try {
+        l = d.getElementsByTagName('a');
+        t = d.createElement('textarea');
+        for (i = 0; l.length - i; i++) {
+            try {
+                a = l[i].href;
+                s = a.indexOf('/cdn-cgi/l/email-protection');
+                m = a.length;
+                if (a && s > -1 && m > 28) {
+                    j = 28 + s;
+                    s = '';
+                    if (j < m) {
+                        r = '0x' + a.substr(j, 2) | 0;
+                        for (j += 2; j < m && a.charAt(j) != 'X'; j += 2)s += '%' + ('0' + ('0x' + a.substr(j, 2) ^ r).toString(16)).slice(-2);
+                        j++;
+                        s = decodeURIComponent(s) + a.substr(j, m - j)
+                    }
+                    t.innerHTML = s.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    l[i].href = 'mailto:' + t.value
+                }
+            } catch (e) {
+            }
+        }
+    } catch (e) {
+    }
+})(document);
 
-<!-- Mirrored from city2.wpmix.net/htmlgit/cityevents_ajaxed/Single-Place.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Nov 2016 08:02:41 GMT -->
-</html>
+{% endblock %}

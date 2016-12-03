@@ -15,7 +15,7 @@
     <div class="b-header__ctrl">
     <div class="b-header__ctrl__item"> <a href="Add-Place.html" class="btn btn--black"><i class="fa fa-plus-square" aria-hidden="true"></i><span>Discover the world</span></a> </div>
 
-    <div class="b-header__ctrl__item"> <a href="{% url 'challenges'  %}" class="btn btn--black"><i class="fa fa-plus-square" aria-hidden="true"></i><span>My Challenges</span></a> </div>
+    <div class="b-header__ctrl__item"> <a href="#" class="btn btn--black"><i class="fa fa-plus-square" aria-hidden="true"></i><span>My Challenges</span></a> </div>
         {% if user and not user.is_anonymous %}
         <div class="b-header__ctrl__item">
             <a href="{% url 'auth:logout' %}?next={{ request.path }}" class="ab-item login">Logout</a>

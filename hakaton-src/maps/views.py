@@ -1,7 +1,7 @@
 from django.http import JsonResponse, HttpResponse
 from django.views import View
 from django.views.generic import TemplateView
-from maps.models import Challenge, AcceptedChallenge
+from maps.models import CompletedChallenge, AcceptedChallenge, Challenge
 
 
 class Index(TemplateView):
@@ -41,10 +41,16 @@ class AddChallenge(View):
 
 class ChallengeView(TemplateView):
     template_name = "challenge_view.html"
+
     def get_context_data(self, **kwargs):
         try:
+
+            accepted_challenges = AcceptedChallenge.objects.filter(user= self.kwargs["user"])
+            completed_challenges = CompletedChallenge.objects.filter(user= self.kwargs["user"])
             challenges = Challenge.objects.all()
             context = super(ChallengeView, self).get_context_data()
+            context['accepted_challenges'] = accepted_challenges
+            context['completed_challenges'] = completed_challenges
             context['challenges'] = challenges
         except:
             pass
