@@ -145,7 +145,7 @@ GOOGLE_MAPS_API_KEY = 'AIzaSyBSVJHRPsTT91tsgmna4JhHs094tdUKR1I'
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # SOCIAL AUTH
