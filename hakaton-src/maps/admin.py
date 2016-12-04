@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django_google_maps import widgets as map_widgets
 from django_google_maps import fields as map_fields
-from maps.models import Challenge
+from maps.models import Challenge, AcceptedChallenge, CompletedChallenge
+
 
 
 class ChallengeAdmin(admin.ModelAdmin):
@@ -10,3 +11,5 @@ class ChallengeAdmin(admin.ModelAdmin):
     }
 
 admin.site.register(Challenge, ChallengeAdmin)
+admin.site.register(AcceptedChallenge)
+admin.site.register(CompletedChallenge)

@@ -50,10 +50,10 @@
 </div>
 <div class="b-menu">
     <div class="container">
-        <h2 class="b-cont-title">My Challenges</h2>
+        <h2 class="b-cont-title">My Challenges "{{ user.id }}"</h2>
 
         <div class="b-slider owl-carousel-1">
-            {% for challenge in challenges %}
+            {% for challenge in accepted_challenges %}
                 <div class="b-menu__set">
                     <div class="b-menu__set__item clearfix">
                         <div class="b-menu__set__item__img"><img class="b-menu__set__item__img"
@@ -61,6 +61,19 @@
                         <div class="b-menu__set__item__title"><a class="b-menu__set__item__name"
                                                                  href="#">{{ challenge.address }}</a> <span
                                 class="press--right b-menu__set__item__price">Accepted</span></div>
+                        <p class="b-menu__set__item__desc"> {{ challenge.description }} </p>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% for challenge in completed_challenges %}
+                <div class="b-menu__set">
+                    <div class="b-menu__set__item clearfix">
+                        <div class="b-menu__set__item__img"><img class="b-menu__set__item__img"
+                                                                 src={{ challenge.photo.url }} alt="menu2"></div>
+                        <div class="b-menu__set__item__title"><a class="b-menu__set__item__name"
+                                                                 href="#">{{ challenge.address }}</a> <span
+                                class="press--right b-menu__set__item__price" style="color: green;">Completed</span></div>
                         <p class="b-menu__set__item__desc"> {{ challenge.description }} </p>
                     </div>
                 </div>

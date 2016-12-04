@@ -14,7 +14,6 @@ class Index(TemplateView):
 
 
 class AllChallengesData(View):
-
     def get(self, request):
         challenges = Challenge.objects.all()
         challenges_json = list()
@@ -32,7 +31,6 @@ class AllChallengesData(View):
 
 
 class AddChallenge(View):
-
     def post(self, request):
         user_id = request.POST.get("userId")
         marker_id = request.POST.get("markerId")
@@ -50,15 +48,31 @@ class ChallengeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         try:
-
-            accepted_challenges = AcceptedChallenge.objects.filter(user= self.kwargs["user"])
-            completed_challenges = CompletedChallenge.objects.filter(user= self.kwargs["user"])
+            accepted_challenges = AcceptedChallenge.objects.filter(user_id=1)
+            accepted_challenges_with_info = self.add_challenge_info(accepted_challenges)
             challenges = Challenge.objects.all()
             context = super(ChallengeView, self).get_context_data()
-            context['accepted_challenges'] = accepted_challenges
-            context['completed_challenges'] = completed_challenges
+            completed_challenges = CompletedChallenge.objects.filter(user_id=1)
+            context['completed_challenges'] = self.add_completed_challenge_info(completed_challenges,accepted_challenges)
+            context['accepted_challenges'] = accepted_challenges_with_info
+            # context['completed_challenges'] = completed_challenges
             context['challenges'] = challenges
         except:
             pass
 
         return context
+
+    def add_challenge_info(self, acc_challenges):
+        acc_challenge_with_acc = []
+        for acc in acc_challenges:
+            challenge = Challenge.objects.get(pk=acc.challenge_id)
+            acc_challenge_with_acc.append(challenge)
+        return acc_challenge_with_acc
+
+    def add_completed_challenge_info(self, comp_challenges ,acc_challenges):
+        acc_challenge_with_acc = []
+        for acc in comp_challenges:
+            if acc not in acc_challenges:
+                challenge = Challenge.objects.get(pk=acc.challenge_id)
+                acc_challenge_with_acc.append(challenge)
+        return acc_challenge_with_acc
