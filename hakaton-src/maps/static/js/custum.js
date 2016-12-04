@@ -456,7 +456,7 @@ function transformData(allChallengesData) {
                 time: "",
                 fetaturesicon: "",
                 description_point: challenge.description,
-                url_point: 'http://city2.wpmix.net/htmlgit/cityevents_ajaxed/Single-Place.html',
+                url_point: '#',
                 moreinfo: "Accept"
             };
             var arr = [];
@@ -479,6 +479,13 @@ function getCurrentLocation(callback) {
 var lot = getCurrentLocation(function(currLocMap) {
     return currLocMap;
 });
+
+function bindAcceptButton(userId, markerId){
+    $(document).on('click', '.green_btn', function (e) {
+        e.preventDefault();
+        acceptChallenge(userId, markerId)
+    })
+}
 
 function acceptChallenge(userId, markerId){
     var url = "/add-challenge";
@@ -551,9 +558,7 @@ function initialize_new() {
                 markers[key] = [];
             markers[key].push(marker);
             google.maps.event.addListener(marker, 'click', (function() {
-                markerId = marker.id;
-                console.log("Marker", markerId);
-                acceptChallenge(user_id, markerId);
+                bindAcceptButton(user_id, marker.id);
                 closeInfoBox();
                 getInfoBoxBigImage(item).open(mapObject, this);
                 var lng1 = new google.maps.LatLng(item.location_latitude,item.location_longitude);

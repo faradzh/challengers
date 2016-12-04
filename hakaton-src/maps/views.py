@@ -42,7 +42,7 @@ class AddChallenge(View):
             AcceptedChallenge.objects.create(challenge=challenge, user=profile)
         except (User.DoesNotExist, Challenge.DoesNotExist):
             pass
-        return HttpResponse(status=201)
+        return JsonResponse({"status": "ok"})
 
 
 class ChallengeView(TemplateView):
