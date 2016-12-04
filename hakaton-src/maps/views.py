@@ -31,6 +31,7 @@ class AllChallengesData(View):
 
 
 class AddChallenge(View):
+
     def post(self, request):
         user_id = request.POST.get("userId")
         marker_id = request.POST.get("markerId")

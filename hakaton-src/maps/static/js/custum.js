@@ -483,7 +483,12 @@ var lot = getCurrentLocation(function(currLocMap) {
 function bindAcceptButton(userId, markerId){
     $(document).on('click', '.green_btn', function (e) {
         e.preventDefault();
-        acceptChallenge(userId, markerId)
+        acceptChallenge(userId, markerId);
+        setTimeout(closeInfoBox, 1000);
+        setTimeout(function () {
+            window.location.replace("/challenges");
+        }, 1000)
+
     })
 }
 
@@ -499,8 +504,9 @@ function acceptChallenge(userId, markerId){
       },
       success: function () {
           console.log("success");
+          $('.green_btn').css('background', 'green').text("Accepted");
       },
-      dataType: "application/json"
+      dataType: "json"
     });
     console.log("In accepting challenges!")
 }
@@ -540,7 +546,7 @@ function initialize_new() {
     var marker;
     mapObject = new google.maps.Map(document.getElementById('gmap_canvas'),mapOptions2);
     google.maps.event.addListener(mapObject, 'click', function() {
-        closeInfoBox();
+        // closeInfoBox();
     });
     var markerCluster;
     for (var key in markersData) {
