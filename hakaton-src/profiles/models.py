@@ -15,7 +15,6 @@ class Profile(models.Model):
     birthday = models.DateField(u'Birthday', blank=True, null=True)
     status = models.CharField(u'Status', max_length=255, blank=True, null=True)
     phone = models.CharField(u'Mobile phone', max_length=30, blank=True, null=True)
-    slug = models.SlugField(unique=True)
     created_at = models.DateTimeField(u'Profile was created: ', auto_now_add=True)
 
     def get_full_name(self):

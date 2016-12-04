@@ -49,11 +49,11 @@ class ChallengeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         try:
-            accepted_challenges = AcceptedChallenge.objects.filter(user_id=1)
+            accepted_challenges = AcceptedChallenge.objects.filter(user_id=2)
             accepted_challenges_with_info = self.add_challenge_info(accepted_challenges)
             challenges = Challenge.objects.all()
             context = super(ChallengeView, self).get_context_data()
-            completed_challenges = CompletedChallenge.objects.filter(user_id=1)
+            completed_challenges = CompletedChallenge.objects.filter(user_id=2)
             context['completed_challenges'] = self.add_completed_challenge_info(completed_challenges,accepted_challenges)
             context['accepted_challenges'] = accepted_challenges_with_info
             # context['completed_challenges'] = completed_challenges
