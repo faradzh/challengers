@@ -6,6 +6,6 @@ urlpatterns = (
     url(r'^challenges-json/$', AllChallengesData.as_view(), name='challenges_json'),
     url(r'^add-challenge$', AddChallenge.as_view(), name='add_challenge'),
     # url(r'^challenges/$', ChallengeView.as_view(), name='challenges')
-    url(r'^challenge_detail/(?P<challenge_slug>\S+)/$', challenge_detail, name='challenge_detail'),
+    url(r'^challenge_detail/(?P<marker_id>[0-9]+)/$', challenge_detail, name='challenge_detail'),
 
 )

@@ -45,8 +45,8 @@ class AddChallenge(View):
         return JsonResponse({"status": "ok"})
 
 
-def challenge_detail(request, challenge_slug):
-    challenge = Challenge.objects.get(slug=challenge_slug)
+def challenge_detail(request, marker_id):
+    challenge = Challenge.objects.get(id=marker_id)
     return render(request, 'challenge_detail.html', {'challenge': challenge})
 
 

@@ -457,7 +457,7 @@ function transformData(allChallengesData) {
                 fetaturesicon: "",
                 description_point: challenge.description,
                 url_point: '#',
-                moreinfo: "Accept"
+                moreinfo: "Details"
             };
             var arr = [];
             arr.push(finalMarkersData);
@@ -486,7 +486,7 @@ function bindAcceptButton(userId, markerId){
         acceptChallenge(userId, markerId);
         setTimeout(closeInfoBox, 1000);
         setTimeout(function () {
-            window.location.replace("/challenges");
+            window.location.replace("/challenge_detail/" + markerId);
         }, 1000)
 
     })
