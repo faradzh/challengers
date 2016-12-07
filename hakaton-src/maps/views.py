@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views import View
@@ -50,37 +51,17 @@ def challenge_detail(request, marker_id):
     return render(request, 'challenge_detail.html', {'challenge': challenge})
 
 
+class ChallengeView(TemplateView):
+    template_name = "challenge_view.html"
 
-# class ChallengeView(TemplateView):
-#     template_name = "challenge_view.html"
-#
-#     def get_context_data(self, **kwargs):
-#         try:
-#             accepted_challenges = AcceptedChallenge.objects.filter(user_id=10)
-#             accepted_challenges_with_info = self.add_challenge_info(accepted_challenges)
-#             challenges = Challenge.objects.all()
-#             context = super(ChallengeView, self).get_context_data()
-#             completed_challenges = CompletedChallenge.objects.filter(user_id=1)
-#             context['completed_challenges'] = self.add_completed_challenge_info(completed_challenges,accepted_challenges)
-#             context['accepted_challenges'] = accepted_challenges_with_info
-#             # context['completed_challenges'] = completed_challenges
-#             context['challenges'] = challenges
-#         except:
-#             pass
-#
-#         return context
-#
-#     def add_challenge_info(self, acc_challenges):
-#         acc_challenge_with_acc = []
-#         for acc in acc_challenges:
-#             challenge = Challenge.objects.get(pk=acc.challenge_id)
-#             acc_challenge_with_acc.append(challenge)
-#         return acc_challenge_with_acc
-#
-#     def add_completed_challenge_info(self, comp_challenges ,acc_challenges):
-#         acc_challenge_with_acc = []
-#         for acc in comp_challenges:
-#             if acc not in acc_challenges:
-#                 challenge = Challenge.objects.get(pk=acc.challenge_id)
-#                 acc_challenge_with_acc.append(challenge)
-#         return acc_challenge_with_acc
+    def get_context_data(self, **kwargs):
+        user_id = self.request.user.id
+        print(user_id)
+        context = super(ChallengeView, self).get_context_data(**kwargs)
+        accepted_challenges = AcceptedChallenge.objects.filter(user_id=user_id)
+        completed_challenges = CompletedChallenge.objects.filter(user_id=user_id)
+        context['accepted_challenges'] = accepted_challenges
+        context['completed_challenges'] = completed_challenges
+        return context
+
+

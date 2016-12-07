@@ -73,10 +73,12 @@
                 <i class="fa fa-camera" aria-hidden="true"></i>
             </a>
         </div>
-        <div class="b-pic__check"><i class="fmr fmr-icon-2100 b-pic__check__icon"></i>
-            <div class="b-pic__check__title">Average check</div>
-            <div class="b-pic__check__amount">100$ - 150$</div>
-        </div>
+
+            <div id="id-container" class="b-pic__check"><i class="b-pic__check__icon fa fa-thumbs-up"></i>
+                <div id={{ challenge.id }} class="b-pic__check__title">Accept the challenge</div>
+                <div class="b-pic__check__amount">{%  firstof challenge.price 'Free'%}</div>
+            </div>
+
         <a rel="prev" class="b-pic__arrow b-pic__arrow--left" href="#"></a>
         <a rel="next" class="b-pic__arrow b-pic__arrow--right" href="#"></a>
     </section>
@@ -543,6 +545,10 @@
             }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI_iMtLfLxggW38M7mrcv2-Fq2NKf8ab4"></script>
+<script type="text/javascript">
+    var user_id = "{{ user.id }}";
+    var csrf_token = "{{ csrf_token }}"
+</script>
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/dropzone.js' %}"></script>
 <script src="{% static 'js/chosen.jquery.min.js' %}"></script>

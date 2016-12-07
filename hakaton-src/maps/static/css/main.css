@@ -3685,6 +3685,8 @@ html .btn--buy-ticket:hover {
     padding: 20px 35px;
     color: #fff;
     min-width: 260px;
+    cursor:pointer;
+    z-index:100;
 }
 
 .b-pic__check__amount {
@@ -3694,12 +3696,14 @@ html .btn--buy-ticket:hover {
 
 .b-pic__check__title {
     clear: right;
+    cursor:pointer!important;
 }
 
 .b-pic__check__icon {
     float: left;
     margin: 10px 20px 0 0;
-    font-size: 30px;
+    font-size: 30px!important;
+    cursor:pointer!important;
 }
 
 .b-menu {
@@ -5755,7 +5759,7 @@ pre {
 
 .marker_info2 a.green_btn {
     background: #dd3333;
-    padding: 7px 50px;
+    padding: 7px 40px;
     color: #ffffff;
     font-size: 16px;
     border-radius: 4px;
@@ -12012,11 +12016,11 @@ ul ul {
     }
 }
 
-@media (min-width: 1200px) {
-    .container {
-        width: 1200px
-    }
-}
+/*@media (min-width: 1200px) {*/
+    /*.container {*/
+        /*width: 1200px*/
+    /*}*/
+/*}*/
 
 .row {
     margin-right: -15px;
@@ -13501,8 +13505,8 @@ ul ul {
 
 @font-face {
     font-family: FontAwesome;
-    src: url(../font/fontawesome.eot?v=4.3.0);
-    src: url(../font/fontawesome.eot?#iefix&v=4.3.0) format('embedded-opentype'), url(../font/fontawesome.woff2?v=4.3.0) format('woff2'), url(../font/fontawesome.woff?v=4.3.0) format('woff'), url(../font/fontawesome.ttf?v=4.3.0) format('truetype'), url(../font/fontawesome.svg?v=4.3.0#fontawesomeregular) format('svg');
+    src: url(../font/fontawesome-webfont.eot);
+    src: url(../font/fontawesome-webfont.eot?#iefix&v=4.3.0) format('embedded-opentype'), url(../font/fontawesome-webfont.woff2?v=4.3.0) format('woff2'), url(../font/fontawesome-webfont.woff?v=4.3.0) format('woff'),url(../font/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular) format('svg');
     font-weight: 400;
     font-style: normal
 }
@@ -21976,4 +21980,9 @@ div.popup {
     background: #fff;
     padding: 20px;
     box-shadow: 0 3px 10px #222
+}
+
+#image-upload{
+    float:right;
+    font-size:20px;
 }

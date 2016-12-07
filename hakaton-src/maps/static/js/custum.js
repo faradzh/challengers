@@ -483,14 +483,21 @@ var lot = getCurrentLocation(function(currLocMap) {
 function bindAcceptButton(userId, markerId){
     $(document).on('click', '.green_btn', function (e) {
         e.preventDefault();
-        acceptChallenge(userId, markerId);
-        setTimeout(closeInfoBox, 1000);
-        setTimeout(function () {
-            window.location.replace("/challenge_detail/" + markerId);
-        }, 1000)
-
+        // acceptChallenge(userId, markerId);
+        window.location.replace("/challenge_detail/" + markerId);
     })
 }
+
+function trivialAcceptButton() {
+    var url = window.location.pathname;
+    var challengeId = url.split('/')[2];
+    var acceptButton = $('#id-container');
+    acceptButton.on('click', function () {
+        acceptChallenge(user_id, challengeId)
+    })
+}
+
+console.log("Marker Id", trivialAcceptButton());
 
 function acceptChallenge(userId, markerId){
     var url = "/add-challenge";
@@ -503,13 +510,18 @@ function acceptChallenge(userId, markerId){
           'csrfmiddlewaretoken': csrf_token
       },
       success: function () {
-          console.log("success");
-          $('.green_btn').css('background', 'green').text("Accepted");
+          console.log("Challenge accepted!");
+          var acceptButton = $('#id-container');
+          var price = $('.b-pic__check__amount');
+          var title = $('.b-pic__check__title');
+          title.text("The challenge accepted!").css('font-size', '17px');
+          price.hide();
+          acceptButton.css('background', '#27ae60');
       },
       dataType: "json"
     });
-    console.log("In accepting challenges!")
 }
+
 var markerId;
 function initialize_new() {
     var bounds = new google.maps.LatLngBounds();
@@ -546,7 +558,7 @@ function initialize_new() {
     var marker;
     mapObject = new google.maps.Map(document.getElementById('gmap_canvas'),mapOptions2);
     google.maps.event.addListener(mapObject, 'click', function() {
-        // closeInfoBox();
+        closeInfoBox();
     });
     var markerCluster;
     for (var key in markersData) {
@@ -780,4 +792,3 @@ Object_byString = function(o, s) {
     }
     return o;
 }
-

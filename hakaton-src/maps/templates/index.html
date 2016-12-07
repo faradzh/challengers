@@ -17,7 +17,7 @@
             <div class="b-header__ctrl__item"><a href="Add-Place.html" class="btn btn--black"><i
                     class="fa fa-plus-square" aria-hidden="true"></i><span>Discover the world</span></a></div>
 
-            <div class="b-header__ctrl__item"><a href="# " class="btn btn--black"><i class="fa fa-plus-square"
+            <div class="b-header__ctrl__item"><a href="{% url 'maps:challenges' %}" class="btn btn--black"><i class="fa fa-plus-square"
                                                                                      aria-hidden="true"></i><span>My Challenges</span></a>
             </div>
             {% if user and not user.is_anonymous %}
@@ -488,9 +488,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI_iMtLfLxggW38M7mrcv2-Fq2NKf8ab4"></script>
     <script type="text/javascript">
@@ -513,6 +511,4 @@
     <script src="{% static 'js/custum.js' %}"></script>
     <script src="{% static 'js/jquery.custom-scrollbar.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
-
-
 {% endblock %}
