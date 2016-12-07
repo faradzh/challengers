@@ -5702,6 +5702,14 @@ pre {
     margin-right: 8px;
 }
 
+span.km {
+    font-size:20px!important;
+}
+span.km i{
+    font-size:25px;
+    color:#eb7b73;
+}
+
 .marker_info2 .km_time {
     z-index: 11111;
     right: -10px;
