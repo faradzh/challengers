@@ -5781,7 +5781,7 @@ pre {
     text-align: center;
     display: block;
     padding: 0px 30px;
-    margin-top: 10px;
+    margin-top: 5px;
     font-size: 16px;
 }
 
@@ -21985,4 +21985,12 @@ div.popup {
 #image-upload{
     float:right;
     font-size:20px;
+}
+
+#info-price{
+    float:left;
+}
+
+#info-points{
+    float:right;
 }

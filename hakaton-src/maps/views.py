@@ -25,6 +25,8 @@ class AllChallengesData(View):
                 'id': challenge.id,
                 'title': challenge.address,
                 'description': challenge.description,
+                'price': challenge.price,
+                'points': challenge.points,
                 'photo': challenge.photo_url,
                 'geolocation': str(challenge.geolocation)
             })

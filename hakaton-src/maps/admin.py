@@ -4,7 +4,6 @@ from django_google_maps import fields as map_fields
 from maps.models import Challenge, AcceptedChallenge, CompletedChallenge
 
 
-
 class ChallengeAdmin(admin.ModelAdmin):
     formfield_overrides = {
         map_fields.AddressField: {'widget': map_widgets.GoogleMapsAddressWidget},

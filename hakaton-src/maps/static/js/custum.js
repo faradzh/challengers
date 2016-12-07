@@ -452,8 +452,8 @@ function transformData(allChallengesData) {
                 map_image_url: challenge.photo,
                 name_point: challenge.title,
                 fa_icon: "/static/img/map/m-195.png",
-                km: "",
-                time: "",
+                price: challenge.price,
+                points: challenge.points,
                 fetaturesicon: "",
                 description_point: challenge.description,
                 url_point: '#',
@@ -689,7 +689,7 @@ function closeInfoBox() {
     if (item.name_point.lenght > 5)
         marker_h2_height = 100;
     return new InfoBox({
-        content: '<div class="marker_info2 none" id="marker_info2">' + '<div class="info" id="info">' + '<span id="icon-new">' + item.fetaturesicon + '</span>' + '<div class="km_time animated fadeIn">' + '<span class="km">' + item.km + '</span>' + '<span class="time">' + item.time + ' </span>' + '</div>' + '<div class="info_img"><img src="' + item.map_image_url + '" class="logotype" alt=""/>' + '<h2 style="height:' + marker_h2_height + 'px' + '">' + item.name_point + '<span>' + '<i class="fa fa-star"></i><i class="fa fa-star"></i>' + '<i class="fa fa-star"></i><i class="fa fa-star">' + '</i><i class="fa fa-star"></i>' + '</span></h2></div>' + '<p>' + item.description_point + '</p>' + '<a href="' + item.url_point + '" class="green_btn">' + item.moreinfo + '</a>' + '<span class="arrow"></span>' + '<div class="marker_info_popup"></div>' + '</div>' + '</div>',
+        content: '<div class="marker_info2 none" id="marker_info2">' + '<div class="info" id="info">' + '<span id="icon-new">' + item.fetaturesicon + '</span>' + '<div class="km_time animated fadeIn">' + '<span class="km">' + item.points + '</span>' + '<span class="time">' + item.time + ' </span>' + '</div>' + '<div class="info_img"><img src="' + item.map_image_url + '" class="logotype" alt=""/>' + '<h2 style="height:' + marker_h2_height + 'px' + '">' + item.name_point + '<span>' + '<i class="fa fa-star"></i><i class="fa fa-star"></i>' + '<i class="fa fa-star"></i><i class="fa fa-star">' + '</i><i class="fa fa-star"></i>' + '</span><span id="info-price">' + item.price + ' $' + '</span><span id="info-points">' + item.points + '  <i class="fa fa-trophy"></i>' + '</span></h2></div>' + '<p>' + item.description_point + '</p>' + '<a href="' + item.url_point + '" class="green_btn">' + item.moreinfo + '</a>' + '<span class="arrow"></span>' + '<div class="marker_info_popup"></div>' + '</div>' + '</div>',
         disableAutoPan: true,
         maxWidth: 0,
         pixelOffset: new google.maps.Size(40,-210),
